@@ -8,12 +8,15 @@ import type { Options } from '../types/index.js';
 export function addEndOfLine(options: Options): void {
   const { projectRoot } = options;
 
-  const filePaths = findFiles('**/*.txt', {
+  const filePaths = findFiles('**/*.hbs', {
     projectRoot,
   });
 
+  console.log(`Files (${filePaths.length}):`, filePaths);
+
   const fileMap = new Map(
     filePaths.map((filePath) => {
+      console.log(`Adding end of line to ${filePath}`);
       const file = readFileSync(join(projectRoot, filePath), 'utf8');
 
       const newFile = file.endsWith('\n') ? file : `${file}\n`;
